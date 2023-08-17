@@ -5,7 +5,7 @@
 Project Proposal: Transportation and Traffic Safety Enhancement in Austin, Texas
 
 **Project Overview:**
-*	**Project Team Members:**
+**Project Team Members:**
 -	Charles Quinn inlikequinn1@gmail.com 
 -	Jackie Larios jlarios838@gmail.com 
 -	Sujatha Angajala sangajala2020@gmail.com 
