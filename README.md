@@ -6,10 +6,10 @@ Project Proposal: Transportation and Traffic Safety Enhancement in Austin, Texas
 
 **Project Overview:**
 *	**Project Team Members:**
-o	Charles Quinn inlikequinn1@gmail.com 
-o	Jackie Larios jlarios838@gmail.com 
-o	Sujatha Angajala sangajala2020@gmail.com 
-o	Joshna Rence joshnarence@gmail.com 
+-	Charles Quinn inlikequinn1@gmail.com 
+-	Jackie Larios jlarios838@gmail.com 
+-	Sujatha Angajala sangajala2020@gmail.com 
+-	Joshna Rence joshnarence@gmail.com 
 
 •	Project Scope and Objectives:
 This proposal aims to present a comprehensive plan for enhancing transportation and traffic safety in Austin, Texas, with the primary goal of mitigating the financial burden of traffic incidents. The project will focus on analyzing historical traffic data to identify trends, patterns, and correlations that will inform targeted improvements.
