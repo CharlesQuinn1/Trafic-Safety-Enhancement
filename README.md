@@ -13,6 +13,7 @@ Project Proposal: Transportation and Traffic Safety Enhancement in Austin, Texas
 
 **Project Scope and Objectives:**
 This proposal aims to present a comprehensive plan for enhancing transportation and traffic safety in Austin, Texas, with the primary goal of mitigating the financial burden of traffic incidents. The project will focus on analyzing historical traffic data to identify trends, patterns, and correlations that will inform targeted improvements.
+
 **Key Objectives:**
 -	Analyze the per-capita trajectory of traffic incidents over a specified period.
 -	Evaluate the evolution of incident types over time.
