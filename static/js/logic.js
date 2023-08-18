@@ -1,57 +1,73 @@
 // Store our API endpoint as queryUrl.
-let queryUrl = "https://data.austintexas.gov/resource/dx9v-zd7x.json?$$app_token=snzNQgy9iCYR2bChVFIJs40KH&$limit=5000";
+let queryUrl = "https://data.austintexas.gov/resource/dx9v-zd7x.json?$$app_token=snzNQgy9iCYR2bChVFIJs40KH&$limit=10000";
 
 // Perform a GET request to the query URL/
 d3.json(queryUrl).then(function (data) {
   console.log(data);
-  // send the data.features object to the createFeatures function.
   createFeatures(data);
 });
 
 function createFeatures(traficData) {
 
-function chooseColor(mag) {
-    if (mag >= 0.14) return "#ff5f65";
-    else if (mag >= 0.09) return "#fca35d";
-    else if (mag >= 0.06) return "#fdb72a";
-    else if (mag >= 0.04) return "#f7db11";
-    else if (mag >= 0.02) return "#dcf400";
-    else if (mag >= 0.0) return "#a3f600";
-    else return "black";
-}
-
-coords = [];
-
-// function runs once for each feature in the features array.
-// Creates a popup that describes the place and time of the earthquake.
-function onEachFeature(feature, layer) {
-
-    coords.push(
-    L.circleMarker([feature.geometry.coordinates[1],feature.geometry.coordinates[0]], {
-        stroke: true,
-        weight: .6,
-        color: "black",
-        fillColor: chooseColor(feature.properties.dmin),
-        fillOpacity: 0.9,
-        opacity: 0.9,
-        radius: feature.properties.mag*3
-      }).bindPopup(`<b>${feature.properties.place}<b/><hr><p>
-                <b>Magnitude:<b/> ${feature.properties.mag.toLocaleString('en-US', {minimumFractionDigits: 1, useGrouping: false})}<br>
-                <b>Depth:<b/> ${(feature.properties.dmin*69.069).toLocaleString('en-US', {minimumFractionDigits: 1, useGrouping: false})} miles</p>`));
+  // Get issue_reported codes
+  issue = [];
+  for (i=0; i < traficData.length; i++){
+    issue.push(traficData[i].issue_reported);
   }
-  
-  // Creates a GeoJSON layer containing the features array on the earthquakeData object.
-  let earthquakes = L.geoJSON(earthquakeData, {
-    onEachFeature: onEachFeature
+
+  // Remove duplicate issue_reported codes
+  let result = [];
+  issue.forEach(function(item) {
+      if(result.indexOf(item) < 0) {
+          result.push(item);
+      }
   });
 
-  earthquakes = L.layerGroup(coords);
+  //print to url
+  console.log(result);
+
+  function chooseColor(issue) {
+    if (issue ==  "Crash Urgent" 
+      || issue ==  "COLLISN/ LVNG SCN" 
+      || issue ==  "Crash Service"
+      || issue == "COLLISION" 
+      || issue == "COLLISION WITH INJURY"
+      || issue == "COLLISION") return "#ff5f65";
+    else if (issue ==  "Traffic Hazard" 
+      || issue ==  "TRFC HAZD/ DEBRIS" 
+      || issue ==  "Traffic Impediment") return "#fca35d";
+    else if (issue ==  "LOOSE LIVESTOCK") return "#fdb72a";
+    else if (issue ==  "zSTALLED VEHICLE") return "#f7db11";
+    else if (issue ==  "ICY ROADWAY") return "#dcf400"; 
+    else if (issue ==  "BOAT ACCIDENT") return "#a3f600";
+    else return "black";
+  }
+
+  coords = [];
+
+  // Creates a GeoJSON layer containing the features array on the earthquakeData object.
+  for (i=0; i < traficData.length; i++){
+    if (!isNaN(parseFloat(traficData[i].latitude)) && !isNaN(parseFloat(traficData[i].longitude)) ) {
+    coords.push(
+      L.circleMarker([parseFloat(traficData[i].latitude),parseFloat(traficData[i].longitude)], {
+          stroke: true,
+          weight: .6,
+          color: "black",
+          fillColor: chooseColor(traficData[i].issue_reported),
+          fillOpacity: 0.9,
+          opacity: 0.9,
+          // radius: feature.properties.mag*3
+          radius: 5
+        }).bindPopup(`<b>${traficData[i].issue_reported}<b/><hr>Date of incident: ${traficData[i].traffic_report_status_date_time}`))
+    }
+  }
+  traffic = L.layerGroup(coords);
 
   // Send earthquakes layer to the createMap function
-  createMap(earthquakes);
+  createMap(traffic);
 }
 
-function createMap(earthquakes) {
+function createMap(traffic) {
 
   // Create the base layers.
   let street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -71,25 +87,27 @@ function createMap(earthquakes) {
 
   // Create an overlay object to hold our overlay.
   let overlayMaps = {
-    Earthquakes: earthquakes
+    Traffic: traffic
   };
 
   // Create our map, giving it the streetmap and earthquakes layers to display on load.
   let myMap = L.map("map", {
-    center: [37.753098, -100.024872],
-    zoom: 5,
-    layers: [street, earthquakes]
+    center: [30.266666, -97.733330],
+    zoom: 11,
+    layers: [street, traffic]
   });
 
   function getColor(d) {
-    return d > 9 ? "#ff5f65" :
-           d > 6  ? "#fca35d" :
-           d > 4  ? "#fdb72a" :
-           d > 2  ? "#f7db11" :
-           d > 1   ? "#dcf400" :
-           d > 0   ? "#a3f600" :
-                       '#FFEDA0';
+    return d >= 6  ? "#a3f600" :
+           d >= 5  ? "#dcf400" :
+           d >= 4  ? "#f7db11" :
+           d >= 3  ? "#fdb72a" :
+           d >= 2  ? "#fca35d" :
+           d >= 1  ? "#ff5f65" :
+           d >= 0  ? "#FFEDA0" :
+                     "#ffffff" ;
   }
+
   let legend = L.control({
       position: 'bottomright'
   });
@@ -97,17 +115,19 @@ function createMap(earthquakes) {
   legend.onAdd = function (map) {
   
       let div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 1, 2, 4, 6, 9],
-        labels = ['<strong>&nbspLEGEND&nbsp</strong><br>&nbspIn Miles&nbsp'],
-        from, to;
+        grades = [0, 1, 2, 3, 4, 5, 6],
+        labels = ['<strong>&nbspLEGEND&nbsp</strong>'],
+        labels2 = ["Collision", "Traffic Hazard", "Loose Livestock", "Stalled Vehicle", "Icy Road", "Boat Accident", "Other"],
+        from,
+         to;
 
       for (var i = 0; i < grades.length; i++) {
           from = grades [i];
           to = grades[i+1];
 
       labels.push(
-          '<i style="background:' + getColor(from + 1) + '"></i> ' +
-           (to ? to : '+') + '&nbsp&ndash;&nbsp' + from);
+          '<i style="background:' + getColor(from + 1) + '"></i> ' + labels2[i]) //+
+          //  (to ? to : ''));
           }
           div.innerHTML = labels.join('<br>');
           return div;    
