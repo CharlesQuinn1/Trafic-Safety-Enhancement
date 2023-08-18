@@ -1,11 +1,13 @@
 // Store our API endpoint as queryUrl.
 let queryUrl = "/api/v1.0/trafficdata";
 
-// Perform a GET request to the query URL/
-d3.json(queryUrl).then(function (data) {
-  console.log(data);
-  createFeatures(data);
-});
+function createPlot() {
+  // Perform a GET request to the query URL/
+  d3.json(queryUrl).then(function (data) {
+    console.log(data);
+    createFeatures(data);
+  });
+}
 
 function createFeatures(traficData) {
 
@@ -145,3 +147,5 @@ function createMap(traffic) {
   }).addTo(myMap);
 
 }
+
+d3.selectAll("#selDataset").on("change",createPlot);
