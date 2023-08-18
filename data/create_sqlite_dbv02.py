@@ -8,6 +8,10 @@ trafficData_df = pd.read_csv(r'Real-Time_Traffic_Incident_Reports.csv')
 cnxn = sqlite3.connect('traffic.db')
 crsr = cnxn.cursor()
 
+# drop table if it exists and recreate
+cnxn.execute("drop table if exists trafficdata")
+cnxn.commit()
+
 # create linechart table with a primary key
 create_statement_trafficdata = """CREATE TABLE trafficdata (
 traffic_report_id text PRIMARY KEY,
@@ -22,13 +26,9 @@ traffic_report_id text PRIMARY KEY,
 );"""
 crsr.execute(create_statement_trafficdata)
 
-print(trafficData_df.head())
-# # insert your dataframes into that database
-# df_linechartdata.to_sql('linechartdata', cnxn, index=False, if_exists="append")
-# df_databystatemarch2023.to_sql('databystatemarch2023', cnxn, index=False, if_exists="append")
-# df_top5industryannualquitrates.to_sql('top5industryannualquitrates', cnxn, index=False, if_exists="append")
-
-# df_sectorquits.to_sql('sectorquits', cnxn, index=False, if_exists="append")
+# insert your dataframes into that database
+trafficData_df.to_sql('trafficdata', cnxn, index=False, if_exists="append")
+cnxn.commit()
 
 cnxn.close()
 
