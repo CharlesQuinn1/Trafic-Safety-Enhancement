@@ -1,69 +1,40 @@
-import numpy as np
-
-import sqlalchemy
-from sqlalchemy.ext.automap import automap_base
+from flask import Flask, render_template, jsonify
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
-import datetime as dt
+
+#load from database file
+from database import table, dbpath
 import pandas as pd
 
-from flask import Flask, jsonify, render_template
-
-#################################################
-# Database Setup
-#################################################
-engine = create_engine(r"sqlite:///Data/traffic.db")
-
-# reflect an existing database into a new model
-Base = automap_base()
-# reflect the tables
-Base.prepare(autoload_with=engine)
-
-# Save reference to the table
-trafficdata = Base.classes.trafficdata
-
-# Create our session (link) from Python to the DB
-session = Session(engine)
-
-#################################################
-# Flask Setup
-#################################################
 app = Flask(__name__)
 
-#################################################
-# Flask Routes
-#################################################
-
 @app.route("/")
-def home():
-    """
-    Render the main page of the webapp.
-
-    """
-    return render_template('index.html')
+def index():
+    return render_template('index_test.html')
 
 @app.route("/api/v1.0/trafficdata")
+
 def trafficdata():
-    # Create our session (link) from Python to the DB
+
+    engine = create_engine(f'sqlite:///{dbpath}')
     session = Session(engine)
-    results = session.query(trafficdata.traffic_report_id, trafficdata.published_date, trafficdata.issue_reported, trafficdata.location,
-                            trafficdata.latitude, trafficdata.longitude, trafficdata.address, trafficdata.status, trafficdata.status_date).all()
+
+    results = pd.read_sql(session.query(table).statement, session.bind)
 
     data = []
-    for traffic_report_id,published_date,issue_reported,location,latitude,longitude,address,status,status_date in results:
-        all_data = {}
-        all_data["traffic_report_id"] = traffic_report_id
-        all_data["published_date"] = published_date
-        all_data["issue_reported"] = issue_reported
-        all_data["location"] = location
-        all_data["latitude"] = latitude
-        all_data["longitude"] = longitude
-        all_data["address"] = address
-        all_data["status"] = status
-        all_data["status_date"] = status_date
-        data.append(all_data)
-        
-    return data
+    for i, traffic_report_id,published_date,issue_reported,location,latitude,longitude,address,status,status_date in results.iterrows():
+        data.append({
+        "traffic_report_id": traffic_report_id,
+        "published_date": published_date,
+        "issue_reported": issue_reported,
+        "location": location,
+        "latitude": latitude,
+        "longitude": longitude,
+        "address": address,
+        "status": status,
+        "status_date": status_date})
+
+    return jsonify(data)
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)

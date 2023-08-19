@@ -5,16 +5,16 @@ import pandas as pd
 trafficData_df = pd.read_csv(r'Real-Time_Traffic_Incident_Reports.csv')
 
 # create a sqlite database and a connection to it
-cnxn = sqlite3.connect('traffic.db')
+cnxn = sqlite3.connect('traffic.sqlite')
 crsr = cnxn.cursor()
 
-# drop table if it exists and recreate
-cnxn.execute("drop table if exists trafficdata")
-cnxn.commit()
+# # drop table if it exists and recreate
+cnxn.execute("drop table trafficdata") 
+# cnxn.commit()
 
 # create linechart table with a primary key
 create_statement_trafficdata = """CREATE TABLE trafficdata (
-traffic_report_id text PRIMARY KEY,
+'traffic_report_id' text PRIMARY KEY,
 'published_date' text,
 'issue_reported' text,
 'location' text,
