@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 
 #load from database file
-from database import table, dbpath
+from database import tableClass
 import pandas as pd
 
 app = Flask(__name__)
@@ -15,11 +15,11 @@ def index():
 @app.route("/api/v1.0/trafficdata")
 
 def trafficdata():
-
-    engine = create_engine(f'sqlite:///{dbpath}')
+    from sqlalchemy.orm import Session
+    engine = create_engine(f'sqlite:///data/traffic.sqllite')
     session = Session(engine)
 
-    results = pd.read_sql(session.query(table).statement, session.bind)
+    results = pd.read_sql(session.query(tableClass).statement, session.bind)
 
     data = []
     for i, traffic_report_id,published_date,issue_reported,location,latitude,longitude,address,status,status_date in results.iterrows():
