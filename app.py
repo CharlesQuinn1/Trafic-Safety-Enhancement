@@ -3,10 +3,10 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 
 #load from database file
-from database import tableClass
+from data.create_sqlite_db_v02 import traffic, database_path
 import pandas as pd
 
-app = Flask(__name__)
+app = Flask(__name__) 
 
 @app.route("/")
 def index():
@@ -16,25 +16,27 @@ def index():
 
 def trafficdata():
     from sqlalchemy.orm import Session
-    engine = create_engine(f'sqlite:///data/traffic.sqllite')
+
+    # load sqlite database
+    engine = create_engine(f'sqlite:///{database_path}', echo=False)
     session = Session(engine)
 
-    results = pd.read_sql(session.query(tableClass).statement, session.bind)
+    results = pd.read_sql(session.query(traffic).all())
 
     data = []
-    for i, traffic_report_id,published_date,issue_reported,location,latitude,longitude,address,status,status_date in results.iterrows():
+    for i, row in results.iterrows():
         data.append({
-        "traffic_report_id": traffic_report_id,
-        "published_date": published_date,
-        "issue_reported": issue_reported,
-        "location": location,
-        "latitude": latitude,
-        "longitude": longitude,
-        "address": address,
-        "status": status,
-        "status_date": status_date})
+            'id': row['id'],
+            'published_date': row['published_date'],
+            'issue_reported': row['issue_reported'],
+            'location': row['location'],
+            'latitude': row['latitude'],
+            'longitude': row['longitude'],
+            'address': row['address'],
+            'status': row['status'],
+            'status_date': row['status_date']})
 
     return jsonify(data)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
