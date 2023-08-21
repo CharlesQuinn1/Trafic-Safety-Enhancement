@@ -16,10 +16,17 @@ def LoadData():
     engine = create_engine(f'sqlite:///traffic.sqlite')
     session = Session(engine)
 
-    results_df = pd.read_sql(session.query(traffic).filter(traffic.issue_reported == "CRASH URGENT").statement, session.bind)
+    crash = ["COLLISION","COLLISION WITH INJURY","COLLISION/PRIVATE PROPERTY",
+             "COLLISN / FTSRA","COLLISN/ LVNG SCN","CRASH SERVICE","CRASH URGENT",
+             "FLEET ACC/ FATAL","FLEET ACC/ INJURY"]
+    results_df = pd.read_sql(session.query(traffic).filter(traffic.issue_reported.in_(crash)).statement, session.bind)
 
     # session.close()
     results_df = results_df.loc[~results_df['latitude'].isna() | ~results_df['longitude'].isna()]
+    # results_df['published_date'] = pd.to_datetime(results_df['published_date']).dt.tz_localize(None)
+    # results_df['published_month'] = results_df['published_date'].dt.month
+    # results_df['published_year'] = results_df['published_date'].dt.year
+
     data = []
     for i, result in results_df.iterrows():
         data.append({

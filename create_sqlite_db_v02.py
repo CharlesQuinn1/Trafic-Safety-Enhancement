@@ -50,18 +50,18 @@ if __name__ == "__main__":
     trafficData_df['id'] = trafficData_df.index
     trafficData_df.drop(columns=['traffic_report_id'], inplace=True)
     trafficData_df = trafficData_df[['id','published_date','issue_reported','location',
-                                    'latitude','longitude','address','status','status_date']] 
+                                    'latitude','longitude','address']] 
     # load sqlite table
     for i, row in trafficData_df.iterrows():
         session.add(traffic(id=row['id'],
                             published_date=row['published_date'],
+                            published_month=row['published_month'],
+                            published_year=row['published_year'],
                             issue_reported=row['issue_reported'],
                             location=row['location'],
                             latitude=row['latitude'],
                             longitude=row['longitude'],
-                            address=row['address'],
-                            status=row['status'],
-                            status_date=row['status_date']))
+                            address=row['address']))
     
     session.commit()
     session.close()
