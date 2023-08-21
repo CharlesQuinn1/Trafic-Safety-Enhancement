@@ -1,42 +1,40 @@
+import pandas as pd
 from flask import Flask, render_template, jsonify
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
+from create_sqlite_db_v02 import traffic
 
-#load from database file
-from data.create_sqlite_db_v02 import traffic, database_path
-import pandas as pd
 
-app = Flask(__name__) 
+app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template('index_test.html')
+    return render_template('index.html')
 
-@app.route("/api/v1.0/trafficdata")
-
-def trafficdata():
-    from sqlalchemy.orm import Session
-
-    # load sqlite database
-    engine = create_engine(f'sqlite:///{database_path}', echo=False)
+@app.route("/LoadData")
+def LoadData():
+    engine = create_engine(f'sqlite:///traffic.sqlite')
     session = Session(engine)
 
-    results = pd.read_sql(session.query(traffic).all())
+    results_df = pd.read_sql(session.query(traffic).filter(traffic.issue_reported == "CRASH URGENT").statement, session.bind)
 
+    # session.close()
+    results_df = results_df.loc[~results_df['latitude'].isna() | ~results_df['longitude'].isna()]
     data = []
-    for i, row in results.iterrows():
+    for i, result in results_df.iterrows():
         data.append({
-            'id': row['id'],
-            'published_date': row['published_date'],
-            'issue_reported': row['issue_reported'],
-            'location': row['location'],
-            'latitude': row['latitude'],
-            'longitude': row['longitude'],
-            'address': row['address'],
-            'status': row['status'],
-            'status_date': row['status_date']})
-
+            # 'id': result['id'],
+            # 'published_date': result['published_date'],
+            'issue_reported': result['issue_reported'],
+            # 'location': result['location'],
+            'latitude': result['latitude'],
+            'longitude': result['longitude']
+            # 'address': result['address'],
+            # 'status': result['status'],
+            # 'status_date': result['status_date']
+        })
+    
     return jsonify(data)
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)

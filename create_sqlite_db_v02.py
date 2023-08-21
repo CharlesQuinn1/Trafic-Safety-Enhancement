@@ -1,13 +1,7 @@
 import os
 from sqlalchemy import create_engine, Column, Integer, String, Float, text
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import Session
-
-path = 'Trafic-Safety-Enhancement/data/'
-dfile = 'Real-Time_Traffic_Incident_Reports.csv'
-datapath = os.path.join(path, dfile)
-dbfile = 'traffic.sqlite'
-database_path = os.path.join(path, dbfile)
+from sqlalchemy.orm import Session, sessionmaker
 
 base = declarative_base()
 
@@ -25,14 +19,30 @@ class traffic(base):
 
 if __name__ == "__main__":
     import pandas as pd
-    from sqlalchemy.orm import Session
+    from sqlalchemy.orm import sessionmaker
+    from sqlalchemy import create_engine
+    import os
+
+    dpath = 'Trafic-Safety-Enhancement/data/'
+    dbpath = 'Trafic-Safety-Enhancement/'
+    dfile = 'Real-Time_Traffic_Incident_Reports.csv'
+    datapath = os.path.join(dpath, dfile)
+    dbfile = 'traffic.sqlite'
+    database_path = os.path.join(dbpath, dbfile)
 
     if os.path.exists(database_path):
         os.remove(database_path)
 
+    Session = sessionmaker()
+    # an Engine, which the session will use for connection resources
     engine = create_engine(f'sqlite:///{database_path}')
     base.metadata.create_all(engine)
-    session = Session(engine)
+    # create a configured Session class
+    Session.configure(bind=engine)
+    # create a session
+    session = Session()
+    
+    
 
     # import data from csv
     trafficData_df = pd.read_csv(datapath)
@@ -54,3 +64,4 @@ if __name__ == "__main__":
                             status_date=row['status_date']))
     
     session.commit()
+    session.close()

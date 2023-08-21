@@ -1,14 +1,22 @@
 // Store our API endpoint as queryUrl.
-let queryUrl = "https://data.austintexas.gov/resource/dx9v-zd7x.json?$$app_token=snzNQgy9iCYR2bChVFIJs40KH&$limit=10000";
+let url = '/LoadData';
 
-// Perform a GET request to the query URL/
-d3.json(queryUrl).then(function (data) {
-  console.log(data);
-  createFeatures(data);
-});
+function createPlot() {
+  const dataPromise = d3.json(url);
+  console.log(dataPromise);
+
+  dataset = d3.select("#Choice").property("value");
+  if(dataset == '1') {
+
+    // Perform a GET request to the query URL/
+    d3.json(url).then(function (data) {
+      createFeatures(data);
+    });
+  }
+}
 
 function createFeatures(traficData) {
-
+  console.log('createFeatures')
   // Get issue_reported codes
   issue = [];
   for (i=0; i < traficData.length; i++){
@@ -68,21 +76,15 @@ function createFeatures(traficData) {
 }
 
 function createMap(traffic) {
-
+  console.log('createMap')
   // Create the base layers.
   let street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   })
 
-  let topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-  });
-
-
   // Create a baseMaps object.
   let baseMaps = {
-    "Street Map": street,
-    "Topographic Map": topo
+    "Street Map": street
   };
 
   // Create an overlay object to hold our overlay.
@@ -145,3 +147,5 @@ function createMap(traffic) {
   }).addTo(myMap);
 
 }
+
+d3.selectAll("#Choice").on("change",createPlot);
