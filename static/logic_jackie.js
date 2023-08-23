@@ -14,6 +14,7 @@ function createPlot() {
     });
   }
 }
+
 function createFeatures(traficData) {
   console.log('createFeatures')
   // Get issue_reported codes
