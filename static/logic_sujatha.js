@@ -12,6 +12,7 @@ function init() {
       groupedData[year].hours.push(entry.hour);
       groupedData[year].counts.push(entry.count);
     });
+    createBarChart(groupedData);
 
     // Create traces for each year
     var traces = [];
@@ -39,6 +40,8 @@ function init() {
 
     // Create a line chart using Plotly
     Plotly.newPlot('bubble', traces, layout);
+    // Create a stacked area chart
+    createStackedAreaChart(data);
   });
 }
 
@@ -85,4 +88,87 @@ function getTickLabels() {
     labels.push(`${hour} ${period}`);
   }
   return labels;
+}
+// Function to create a bar chart for total report counts by year
+function createBarChart(groupedData) {
+  var years = Object.keys(groupedData);
+  var counts = years.map(year => groupedData[year].counts.reduce((sum, count) => sum + count, 0));
+
+  var barTrace = {
+    x: years,
+    y: counts,
+    type: 'bar',
+    marker: {
+      color: 'blue' // Adjust color as needed
+    }
+  };
+
+  var barData = [barTrace];
+
+  // Layout settings for bar chart
+  var barLayout = {
+    title: 'Total Traffic Report Counts by Year',
+    xaxis: { title: 'Year' },
+    yaxis: { title: 'Total Count' }
+  };
+
+  // Create a bar chart using Plotly
+  Plotly.newPlot('bar', barData, barLayout);
+}
+// Function to create a stacked area chart
+function createStackedAreaChart(data) {
+  // Group data by time period and hour
+  var groupedData = {
+    "Morning": {"hours": [], "counts": []},
+    "Afternoon": {"hours": [], "counts": []},
+    "Evening": {"hours": [], "counts": []},
+    "Night": {"hours": [], "counts": []}
+  };
+
+  data.forEach(function(entry) {
+    var timePeriod = getTimePeriod(entry.hour);
+    if (timePeriod) {
+      groupedData[timePeriod].hours.push(entry.hour);
+      groupedData[timePeriod].counts.push(entry.count);
+    }
+  });
+
+  // Create traces for each time period
+  var traces = [];
+  for (var timePeriod in groupedData) {
+    var trace = {
+      x: groupedData[timePeriod].hours,
+      y: groupedData[timePeriod].counts,
+      mode: 'lines',
+      stackgroup: 'one',
+      name: timePeriod
+    };
+    traces.push(trace);
+  }
+
+  // Layout settings for stacked area chart
+  var layout = {
+    title: 'Traffic Report Counts by Time Period',
+    xaxis: {
+      title: 'Hour',
+      tickvals: getTickValues(),
+      ticktext: getTickLabels(),
+    },
+    yaxis: { title: 'Count' },
+    showlegend: true
+  };
+
+  // Create a stacked area chart using Plotly
+  Plotly.newPlot('gauge', traces, layout);
+}
+function getTimePeriod(hour) {
+  if (hour >= 0 && hour < 6) {
+    return "Night";
+  } else if (hour >= 6 && hour < 12) {
+    return "Morning";
+  } else if (hour >= 12 && hour < 18) {
+    return "Afternoon";
+  } else {
+    return "Evening";
+  }
 }
