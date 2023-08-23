@@ -124,7 +124,7 @@ function createStackedAreaChart(data) {
     "Evening": {"hours": [], "counts": []},
     "Night": {"hours": [], "counts": []}
   };
-
+  var years = Object.keys(data);
   data.forEach(function(entry) {
     var timePeriod = getTimePeriod(entry.hour);
     if (timePeriod) {
@@ -137,7 +137,7 @@ function createStackedAreaChart(data) {
   var traces = [];
   for (var timePeriod in groupedData) {
     var trace = {
-      x: groupedData[timePeriod].hours,
+      x: groupedData[timePeriod].years,
       y: groupedData[timePeriod].counts,
       mode: 'lines',
       stackgroup: 'one',
@@ -150,9 +150,9 @@ function createStackedAreaChart(data) {
   var layout = {
     title: 'Traffic Report Counts by Time Period',
     xaxis: {
-      title: 'Hour',
-      tickvals: getTickValues(),
-      ticktext: getTickLabels(),
+      title: 'Years',
+      tickvals: years,
+      ticktext:years ,
     },
     yaxis: { title: 'Count' },
     showlegend: true
