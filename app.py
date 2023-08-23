@@ -20,13 +20,42 @@ def geoData():
                             password='postgres')
 
     cur = conn.cursor()
-    txt = "select id as id, published_date::timestamp as published_date, issue_reported as issue_reported, ST_X(ST_Centroid(ST_Transform(geometry, 4326))) AS longitude, ST_Y(ST_Centroid(ST_Transform(geometry, 4326))) AS latitude from trafficgeo"
-    cur.execute(txt)
+    # txt = "select id as id, published_date::timestamp as published_date, issue_reported as issue_reported, ST_X(ST_Centroid(ST_Transform(geometry, 4326))) AS longitude, ST_Y(ST_Centroid(ST_Transform(geometry, 4326))) AS latitude from trafficgeo"
+    sql_command = 'select row_to_json(fc)'
+    sql_command += 'from ('
+    sql_command += '    select'
+    sql_command += "        'FeatureCollection'"
+    sql_command += '		as "type",'
+    sql_command += '        array_to_json(array_agg(f))'
+    sql_command += '		as "features"'
+    sql_command += '    from ('
+    sql_command += '        select'
+    sql_command += "            'Feature'"
+    sql_command += '			as "type",'
+    sql_command += '            ST_AsGeoJSON(ST_Transform(geometry, 4326), 6) :: json'
+    sql_command += '			as "geometry",'
+    sql_command += '            ('
+    sql_command += '                select json_strip_nulls(row_to_json(t))'
+    sql_command += '                from ('
+    sql_command += '                    select'
+    sql_command += '                        id,'
+    sql_command += '                        published_date::timestamp,'
+    sql_command += '                        issue_reported'
+    sql_command += '                ) t'
+    sql_command += '            )'
+    sql_command += '			as "properties"'
+    sql_command += '        from trafficgeo'
+    sql_command += '        where'
+    sql_command += "            published_date::timestamp > '2023-01-01'"
+    sql_command += '    ) as f'
+    sql_command += ') as fc;'
+    cur.execute(sql_command)
     data = cur.fetchall()
     cur.close()
     conn.close()
-    return jsonify(data)
+    return data
     # return render_template('index_.html', data = data)
+
 
 
 

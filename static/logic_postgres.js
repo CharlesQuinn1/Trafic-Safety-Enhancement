@@ -21,9 +21,9 @@ function createPlot() {
 
     // Get the data with d3.
     d3.json(url).then(function(data) {
-      console.log(data);
-      // console.log(data[0][4]);
-
+      console.log(data[0][0]['features'][0]['geometry']['coordinates'][0]);
+      data = data[0][0]['features']
+      // console.log(data);
       // Create a new marker cluster group.
       let markers = L.markerClusterGroup({
         iconCreateFunction: function (cluster) {
@@ -54,7 +54,8 @@ function createPlot() {
       for (let i = 0; i < data.length; i++) {
 
         // Add a new marker to the cluster group, and bind a popup.
-        markers.addLayer(L.marker([data[i][4], data[i][3]]).bindPopup('bob'));
+        markers.addLayer(L.marker([data[i]['geometry']['coordinates'][1], data[i]['geometry']['coordinates'][0]])
+          .bindPopup('bob'));
         }
 
       // Add our marker cluster layer to the map.
