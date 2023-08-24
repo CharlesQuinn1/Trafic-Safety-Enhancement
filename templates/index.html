@@ -17,6 +17,11 @@
   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
   crossorigin=""></script>
 
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
   <!-- D3 library -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
@@ -37,18 +42,20 @@
 
 <body>
   <header class="header-main">
-    <!-- <div class="header-main-logo"></div> -->
-      <!-- <img src="/Images/1-Logo.png" alt="test logo"</img> -->
+    <div class="header-main-logo"></div>
+      <img src="{{ url_for('static', filename='Logov02.png') }}"></img>
       <nav class="header-main-nav">
         <ul>
           <li><a href="/">HOME</a></li>
           <li id="geoData"><a href="#">Cluster Map</a></li>
-          <li><a href="#">Jackie html</a></li>
-          <li><a href="index_sujatha.html" target="_blank">Sujatha html</a></li>
-          <li><a href="#">Joshna html</a></li>
+          <li id="Jackie"><a href="#">Jackie</a></li>
+          <li id="Sujatha"><a href="#">Sujatha</a></li>
+          <li id="Joshna"><a href="#">Joshna</a></li>
         </ul>
       </nav>
   </header>
+  <!-- <div class="box"></div> -->
+  <!-- <div class="container"></div> -->
 
   <!-- The div that holds our map --> 
   <div id="map"></div>
