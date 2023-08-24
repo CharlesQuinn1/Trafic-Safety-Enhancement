@@ -2,7 +2,6 @@ import pandas as pd
 from flask import Flask, render_template, jsonify
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
-from create_sqlite_db_v02 import traffic
 
 app = Flask(__name__)
 
