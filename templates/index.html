@@ -17,6 +17,11 @@
   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
   crossorigin=""></script>
 
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
   <!-- D3 library -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
@@ -28,26 +33,38 @@
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
 
   <!-- Our CSS -->
-  <link rel="stylesheet"  type="text/css" href="../static/style.css">
+
+  <!-- <link rel="stylesheet"  type="text/css" href="../static/reset.css"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='reset.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- <link rel="stylesheet"  type="text/css" href="../static/style.css"> -->
 </head>
 
 <body>
-  <h2>Traffic Safety Enhancements</h2>
-  <p>Change Drop Down To Update Plot</p>
-  <select id="Choice">
-      <option value="0">Choose Graph</option>
-      <option value="1">Graph1</option>
-      <option value="2">Graph2</option>
-      <option value="3">Graph3</option>
-      <option value="4">Graph4</option>
-  </select>
+  <header class="header-main">
+    <div class="header-main-logo"></div>
+      <img src="{{ url_for('static', filename='Logov02.png') }}"></img>
+      <nav class="header-main-nav">
+        <ul>
+          <li><a href="/">HOME</a></li>
+          <li id="geoData"><a href="#">Cluster Map</a></li>
+          <li id="Jackie"><a href="#">Jackie</a></li>
+          <li id="Sujatha"><a href="#">Sujatha</a></li>
+          <li id="Joshna"><a href="#">Joshna</a></li>
+        </ul>
+      </nav>
+  </header>
+  <!-- <div class="box"></div> -->
+  <!-- <div class="container"></div> -->
+
   <!-- The div that holds our map --> 
   <div id="map"></div>
 
   <!-- Our JavaScript -->
   <!-- <script src="../static/logic.js"></script> -->
   <!-- <script src="../static/logic_jackie.js"></script> -->
-  <script src="../static/logic_postgres.js"></script>
+  <!-- <script src="../static/logic_postgres.js"></script> -->
+  <script src="{{ url_for('static', filename='logic_postgres.js') }}"></script>
   
 </body>
 
