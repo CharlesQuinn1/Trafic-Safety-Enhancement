@@ -46,7 +46,7 @@ def geoData():
     sql_command += '			as "properties"'
     sql_command += '        from trafficgeo'
     sql_command += '        where'
-    sql_command += "            published_date::timestamp > '2023-01-01'"
+    sql_command += "            published_date::timestamp > '2023-06-01'"
     sql_command += '    ) as f'
     sql_command += ') as fc;'
     cur.execute(sql_command)
@@ -54,7 +54,7 @@ def geoData():
     cur.close()
     conn.close()
     return data
-    # return render_template('index_.html', data = data)
+    # return render_template('index.html',data=data)
 
 
 
