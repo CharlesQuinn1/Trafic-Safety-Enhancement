@@ -58,7 +58,7 @@ function createPlot() {
     for (let i = 0; i < data.length; i++) {
 
       // Add a new marker to the cluster group, and bind a popup.
-      markers.addLayer(L.marker([data[i][4], data[i][5]])
+      markers.addLayer(L.marker([data[i]['latitude'], data[i]['longitude']])
         .bindPopup('bob'));
       }
 
@@ -69,4 +69,4 @@ function createPlot() {
     
 }
 
-d3.selectAll(".menu-one").on("click",createPlot);
+// d3.selectAll(".menu-one").on("click",createPlot);

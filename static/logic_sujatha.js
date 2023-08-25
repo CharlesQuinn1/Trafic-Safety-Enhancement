@@ -1,6 +1,6 @@
-init();
+// init();
 
-function init() {
+function dashboard() {
   d3.json("/api/v1.0/date").then(data => {
     // Group data by year
     var groupedData = {};
@@ -12,7 +12,7 @@ function init() {
       groupedData[year].hours.push(entry.hour);
       groupedData[year].counts.push(entry.count);
     });
-    createBarChart(groupedData);
+    // createBarChart(groupedData);
 
     // Create traces for each year
     var traces = [];
@@ -89,32 +89,32 @@ function getTickLabels() {
   }
   return labels;
 }
-// Function to create a bar chart for total report counts by year
-function createBarChart(groupedData) {
-  var years = Object.keys(groupedData);
-  var counts = years.map(year => groupedData[year].counts.reduce((sum, count) => sum + count, 0));
+// // Function to create a bar chart for total report counts by year
+// function createBarChart(groupedData) {
+//   var years = Object.keys(groupedData);
+//   var counts = years.map(year => groupedData[year].counts.reduce((sum, count) => sum + count, 0));
 
-  var barTrace = {
-    x: years,
-    y: counts,
-    type: 'bar',
-    marker: {
-      color: 'blue' // Adjust color as needed
-    }
-  };
+//   var barTrace = {
+//     x: years,
+//     y: counts,
+//     type: 'bar',
+//     marker: {
+//       color: 'blue' // Adjust color as needed
+//     }
+//   };
 
-  var barData = [barTrace];
+//   var barData = [barTrace];
 
-  // Layout settings for bar chart
-  var barLayout = {
-    title: 'Total Traffic Report Counts by Year',
-    xaxis: { title: 'Year' },
-    yaxis: { title: 'Total Count' }
-  };
+//   // Layout settings for bar chart
+//   var barLayout = {
+//     title: 'Total Traffic Report Counts by Year',
+//     xaxis: { title: 'Year' },
+//     yaxis: { title: 'Total Count' }
+//   };
 
-  // Create a bar chart using Plotly
-  Plotly.newPlot('bar', barData, barLayout);
-}
+//   // Create a bar chart using Plotly
+//   Plotly.newPlot('bar', barData, barLayout);
+// }
 // Function to create a stacked area chart
 function createStackedAreaChart(data) {
   // Group data by time period and hour

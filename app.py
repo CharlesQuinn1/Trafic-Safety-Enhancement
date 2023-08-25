@@ -1,7 +1,28 @@
 import pandas as pd
 from flask import Flask, render_template, jsonify
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, func
+from sqlalchemy import create_engine, func, extract
+from sqlalchemy.ext.automap import automap_base
+
+#################################################
+# Database Setup
+#################################################
+
+# engine = create_engine("sqlite:///traffic.sqlite")
+engine = create_engine("postgresql://postgres:postgres@localhost:5432/traffic")
+# reflect an existing database into a new model
+Base = automap_base()
+
+# reflect the tables
+Base.prepare(engine, reflect=True)
+
+# Save references to each table
+TrafficReport = Base.classes.traffic_report
+
+
+# Create our session (link) from Python to the DB
+
+session = Session(engine)
 
 app = Flask(__name__)
 
@@ -11,51 +32,54 @@ def index():
 
 @app.route("/geoData")
 def geoData():
+
+    # session = Session(engine)
+    # Query to group by year and time
+    results = (
+    session.query(
+        TrafficReport.latitude,
+        TrafficReport.longitude
+    ).all()
+    )
+ # Convert results to a list of dictionaries
+    result_dicts = [
+    {"latitude": result.latitude, "longitude": result.longitude}
+    for result in results
+    ]
+
+    session.close()
+
+    return jsonify(result_dicts)
     
-    engine_url = "postgresql://postgres:postgres@localhost:5432/trafficdb"
-    engine = create_engine(engine_url)
-    conn = engine.raw_connection()
-    cur = conn.cursor()
-    sql_command = 'select '
-    sql_command += ' id '
-    sql_command += ",to_char(published_date, 'YYYY-MM-DD HH24:MI:SS') as published_date "
-    sql_command += ',issue_reported '
-    sql_command += ',location '
-    sql_command += ',latitude '
-    sql_command += ',longitude '
-    sql_command += ',address '
-    sql_command += 'from traffic_data '
-    sql_command += "where published_date >= '2017-01-01' "
-    sql_command += "and published_date < '2023-01-01'"
+@app.route('/api/v1.0/date')
+def date_func2():    
+    # session = Session(engine)
+    # Query to group by year and time
+    results = (
+    session.query(
+        extract('year', TrafficReport.published_date).label('year'),
+        extract('hour', TrafficReport.published_date).label('hour'),
+        func.count(TrafficReport.published_date).label('count')
+    )
+    .group_by('year', 'hour')
+    .all()
+    )
+ # Convert results to a list of dictionaries
+    result_dicts = [
+    {"year": result.year, "hour": result.hour, "count": result.count}
+    for result in results
+    ]
 
-    cur.execute(sql_command)
-    data = cur.fetchall()
-    cur.close()
-    conn.close()
-    return jsonify(data)
+    # Convert list of dictionaries to JSON
+    #json_result = json.dumps(result_dicts, indent=4)
 
-@app.route("/chartData")
-def chartData():
-    
-    engine_url = "postgresql://postgres:postgres@localhost:5432/trafficdb"
-    engine = create_engine(engine_url)
-    conn = engine.raw_connection()
-    cur = conn.cursor()
+# Print or use the JSON result
 
-    sql_command = 'select '
-    sql_command += " date_trunc('day', published_date) as published_date "
-    sql_command += ",count(id) as incidents "
-    sql_command += "from traffic_data "
-    sql_command += "where published_date >= '2017-01-01' "
-    sql_command += "and published_date < '2023-01-01' "
-    sql_command += "group by "
-    sql_command += "date_trunc('day', published_date) "
+    session.close()
 
-    cur.execute(sql_command)
-    data = cur.fetchall()
-    cur.close()
-    conn.close()
-    return jsonify(ch_data)
+    return jsonify(result_dicts)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

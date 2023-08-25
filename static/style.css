@@ -84,6 +84,8 @@ input[type="radio"]{
   margin: 0 10px 0 10px;
 }
 
+
+
 .menu-home {
   padding: 0 10px;
   width: fit-content;
@@ -179,18 +181,6 @@ input[type="radio"]{
   color: blue
 }
 
-.box {
-  position: static;
-  width: 100px;
-  height: 100px;
-  background-color: lightgray;
-}
-
-.container {
-  width: 100px;
-  height: 100px;
-  background-color: red;
-}
 
 #map,
 body,

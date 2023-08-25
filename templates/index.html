@@ -33,10 +33,11 @@
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
 
   <!-- Our CSS -->
-
-  
   <link rel="stylesheet" href="{{ url_for('static', filename='reset.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   
 </head>
 
@@ -45,23 +46,9 @@
     <div class="header-main-logo"></div>
       <img src="{{ url_for('static', filename='Logov02.png') }}"></img>
       <div class="header-main-nav">
-        <!-- <ul>
-          <li><a href="/">HOME</a></li>
-          <li id="geoData"><a href="#">Cluster Map</a></li>
-          <li id="Jackie"><a href="#">Jackie</a></li>
-          <li id="Sujatha"><a href="#">Sujatha</a></li>
-          <li id="Joshna"><a href="#">Joshna</a></li>
-          <li id="chartData"><a href="#">Chart</a></li>
-        </ul> -->
-        <!-- <div class="menu-home"><a href="/">HOME</a></div>
-        <div class="menu-one"><a href="#">Cluster Map</a></div>
-        <div class="menu-two"><a href="#">Jackie</a></div>
-        <div class="menu-three"><a href="#">Sujatha</a></div>
-        <div class="menu-four"><a href="#">Joshna</a></div>
-        <div class="menu-five"><a href="#">Chart</a></div> -->
-        HOME <input type="radio" name="currency"  id="chf_currency" checked="checked" onChange="returnHome()" />
-        Cluster Map <input type="radio" name="currency" id="usd_currency" onChange="createPlot()"/>
-        Jackie <input type="radio" name="currency" onChange="currencyChanged()"/>
+        HOME <input type="radio" name="currency"  id="option_one" checked="checked" onChange="returnHome()" />
+        Dashboard <input type="radio" name="currency" id="option_two" onChange="dashboard()"/>
+        Cluster Map <input type="radio" name="currency" id="option_three" onChange="createPlot()"/>
       </div>
   </header>
     <div class="container">
@@ -73,38 +60,23 @@
           <div id="bar"></div>
         </div>
         <div class="col-md-7">
-          <div id="gauge"></div>
+          <div id="stack"></div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
-          <div id="bubble"></div>
+          <div id="line"></div>
         </div>
       </div>
     </div>
-
-  <!-- <div class="radio-container">
-    <input type="radio" id="html" name="fav_language" value="HTML"><label for="html">HTML</label><br>
-    <input type="radio" id="css" name="fav_language" value="CSS"><label for="css">CSS</label><br>
-    <input type="radio" id="javascript" name="fav_language" value="JavaScript"><label for="javascript">JavaScript</label>
-  </div> -->
-  <!-- <div class="box">
-    <input type="radio" id="html" name="fav_language" value="HTML"><label for="html">HTML</label><br>
-    <input type="radio" id="css" name="fav_language" value="CSS"><label for="css">CSS</label><br>
-    <input type="radio" id="javascript" name="fav_language" value="JavaScript"><label for="javascript">JavaScript</label>
-  </div>
-  <div class="container"></div>
-  <div class="chart-container"></div> -->
 
   <!-- The div that holds our map --> 
   <div id="map"></div>
 
   <!-- Our JavaScript -->
-  <!-- <script src="../static/logic.js"></script> -->
-  <!-- <script src="../static/logic_jackie.js"></script> -->
-  <!-- <script src="../static/logic_postgres.js"></script> -->
+  
   <script src="{{ url_for('static', filename='logic_postgres.js') }}"></script>
-  <!-- <script src="{{ url_for('static', filename='chart.js') }}"></script> -->
+  <script src="{{ url_for('static', filename='logic_sujatha.js') }}"></script>
   
 </body>
 

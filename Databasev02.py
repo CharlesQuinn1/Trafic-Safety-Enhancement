@@ -13,7 +13,7 @@ from sqlalchemy import create_engine, Column, Integer, String, Float, MetaData, 
 #################################################
 
 # Establish file path
-dpath = 'Trafic-Safety-Enhancement/data/'
+dpath = 'c:/C_Drive/Bootcamp/Project3/Trafic-Safety-Enhancement/data/'
 dbpath = 'Trafic-Safety-Enhancement/'
 dfile = 'Real-Time_Traffic_Incident_Reports.csv'
 gfile = 'LOCATION_grids_200.geojson'
@@ -34,16 +34,18 @@ trafficData_df = trafficData_df[['id','published_date','issue_reported','locatio
 # Remove invalid coordinates
 trafficData_df = trafficData_df.loc[~trafficData_df['latitude'].isna() | ~trafficData_df['longitude'].isna()]
 
+
+
 # Create connection to local postgres database
-engine_url = "postgresql://postgres:postgres@localhost:5432/trafficdb"
+engine_url = "postgresql://postgres:postgres@localhost:5432/traffic"
 engine = create_engine(engine_url)
 conn = engine.connect() 
 metadata = MetaData(engine)
 
 # Create table and load data
-exist=sqlalchemy.inspect(engine).has_table("traffic_data")
+exist=sqlalchemy.inspect(engine).has_table("traffic_report")
 if exist == False:
-    trafficData_df.to_sql('traffic_data', engine)
+    trafficData_df.to_sql('traffic_report', engine)
     print("Table loaded")
 else:
  print("Table already exists in database")
