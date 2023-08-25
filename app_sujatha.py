@@ -2,7 +2,6 @@ import pandas as pd
 from flask import Flask, render_template, jsonify
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func,extract,cast
-from create_sqlite_db_v02 import traffic
 from datetime import datetime
 
 # Import the dependencies.
@@ -43,21 +42,6 @@ def index():
     return render_template('index_sujatha.html')
 
 @app.route('/api/v1.0/date')
-def date_func():    
-    session = Session(engine)
-    results = session.query(TrafficReport.published_date).limit(100).all()
-    date_buckets = {}
-
-    for date in results:
-        date_str = date[0]
-        # published_datetime = datetime.strptime(date.published_date, '%m/%d/%Y %I:%M:%S %p %z')
-        date_str = date.published_date.strftime('%Y-%m-%d %H:%M:%S')
-        date_buckets[date_str]= date.published_date
-    session.close()
-
-    return jsonify(date_buckets)
-
-@app.route('/api/v1.0/date2')
 def date_func2():    
     session = Session(engine)
     # Query to group by year and time

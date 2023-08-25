@@ -1,7 +1,7 @@
 init();
 
 function init() {
-  d3.json("/api/v1.0/date2").then(data => {
+  d3.json("/api/v1.0/date").then(data => {
     // Group data by year
     var groupedData = {};
     data.forEach(function(entry) {
@@ -39,7 +39,7 @@ function init() {
     };
 
     // Create a line chart using Plotly
-    Plotly.newPlot('bubble', traces, layout);
+    Plotly.newPlot('line', traces, layout);
     // Create a stacked area chart
     createStackedAreaChart(data);
   });
@@ -159,7 +159,7 @@ function createStackedAreaChart(data) {
   };
 
   // Create a stacked area chart using Plotly
-  Plotly.newPlot('gauge', traces, layout);
+  Plotly.newPlot('stack', traces, layout);
 }
 function getTimePeriod(hour) {
   if (hour >= 0 && hour < 6) {
