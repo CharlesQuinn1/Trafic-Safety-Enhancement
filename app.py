@@ -34,5 +34,28 @@ def geoData():
     conn.close()
     return jsonify(data)
 
+@app.route("/chartData")
+def chartData():
+    
+    engine_url = "postgresql://postgres:postgres@localhost:5432/trafficdb"
+    engine = create_engine(engine_url)
+    conn = engine.raw_connection()
+    cur = conn.cursor()
+
+    sql_command = 'select '
+    sql_command += " date_trunc('day', published_date) as published_date "
+    sql_command += ",count(id) as incidents "
+    sql_command += "from traffic_data "
+    sql_command += "where published_date >= '2017-01-01' "
+    sql_command += "and published_date < '2023-01-01' "
+    sql_command += "group by "
+    sql_command += "date_trunc('day', published_date) "
+
+    cur.execute(sql_command)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return jsonify(ch_data)
+
 if __name__ == "__main__":
     app.run(debug=True)

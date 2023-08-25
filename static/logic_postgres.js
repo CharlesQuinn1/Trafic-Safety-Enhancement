@@ -1,5 +1,13 @@
 // Store our API endpoint as queryUrl.
 let url = '/geoData';
+let homeUrl = '/';
+
+function returnHome() {
+  // Get the data with d3.
+  const dataPromise = d3.json(homeUrlSurl);
+  console.log(dataPromise);
+
+  }
 
 function createPlot() {
   const dataPromise = d3.json(url);
@@ -61,4 +69,4 @@ function createPlot() {
     
 }
 
-d3.selectAll("#geoData").on("click",createPlot);
+d3.selectAll(".menu-one").on("click",createPlot);

@@ -72,11 +72,94 @@ a {
 .header-main-nav {
   width: fit-content;
   height: 100%;
+  font-family: 'Roboto', sans-serif;
+  line-height: 60px;
+  /* color: #000; */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-.header-main-nav ul {
-  list-style: none;
-  align-self: flex-start;
+input[type="radio"]{
+  margin: 0 10px 0 10px;
+}
+
+.menu-home {
+  padding: 0 10px;
+  width: fit-content;
+  height: 100%;
+  line-height: 60px;
+  color: #000;
+  display: block;
+}
+
+.menu-home:hover {
+  color: blue
+}
+
+.menu-one {
+  padding: 0 10px;
+  width: fit-content;
+  height: 100%;
+  line-height: 60px;
+  color: #000;
+  display: block;
+}
+
+.menu-one:hover {
+  color: blue
+}
+
+.menu-two {
+  padding: 0 10px;
+  width: fit-content;
+  height: 100%;
+  line-height: 60px;
+  color: #000;
+  display: block;
+}
+
+.menu-two:hover {
+  color: blue
+}
+
+.menu-three {
+  padding: 0 10px;
+  width: fit-content;
+  height: 100%;
+  line-height: 60px;
+  color: #000;
+  display: block;
+}
+
+.menu-three:hover {
+  color: blue
+}
+
+.menu-four {
+  padding: 0 10px;
+  width: fit-content;
+  height: 100%;
+  line-height: 60px;
+  color: #000;
+  display: block;
+}
+
+.menu-four:hover {
+  color: blue
+}
+
+.menu-five {
+  padding: 0 10px;
+  width: fit-content;
+  height: 100%;
+  line-height: 60px;
+  color: #000;
+  display: block;
+}
+
+.menu-five:hover {
+  color: blue
 }
 
 .header-main-nav ul li {
@@ -100,7 +183,7 @@ a {
   position: static;
   width: 100px;
   height: 100px;
-  background-color: blue;
+  background-color: lightgray;
 }
 
 .container {
