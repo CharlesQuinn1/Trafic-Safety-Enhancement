@@ -20,3 +20,11 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.traffic_report
     OWNER to postgres;
+-- Cleaning up the data    
+DELETE FROM traffic_report
+WHERE
+    published_date::timestamp >= '2023-03-04 08:36:00'::timestamp;
+    
+DELETE FROM traffic_report
+WHERE
+    published_date::timestamp <= '2017-12-31 24:00:00'::timestamp;

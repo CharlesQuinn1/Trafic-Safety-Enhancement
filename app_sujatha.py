@@ -41,7 +41,6 @@ app = Flask(__name__)
 def index():
     return render_template('index_sujatha.html')
 
-
 @app.route('/api/v1.0/date')
 def date_func2():    
     session = Session(engine)
