@@ -138,8 +138,9 @@ function createStackedAreaChart(data) {
       // Check if the year is not already in the years array
       if (!groupedData[timePeriod].years.includes(entry.year)) {
         groupedData[timePeriod].years.push(entry.year);
+        groupedData[timePeriod].counts.push(entry.count);
       }
-      groupedData[timePeriod].counts.push(entry.count);
+      
     }
   });
 
