@@ -122,19 +122,23 @@ function createBarChart(groupedData) {
   Plotly.newPlot('bar', barData, barLayout);
 }
 // Function to create a stacked area chart
+
 function createStackedAreaChart(data) {
-  // Group data by time period and hour
+  // Group data by time period and year
   var groupedData = {
-    "Morning": {"hours": [], "counts": []},
-    "Afternoon": {"hours": [], "counts": []},
-    "Evening": {"hours": [], "counts": []},
-    "Night": {"hours": [], "counts": []}
+    "Morning": {"years": [], "counts": []},
+    "Afternoon": {"years": [], "counts": []},
+    "Evening": {"years": [], "counts": []},
+    "Night": {"years": [], "counts": []}
   };
-  var years = Object.keys(data);
+  
   data.forEach(function(entry) {
     var timePeriod = getTimePeriod(entry.hour);
     if (timePeriod) {
-      groupedData[timePeriod].hours.push(entry.hour);
+      // Check if the year is not already in the years array
+      if (!groupedData[timePeriod].years.includes(entry.year)) {
+        groupedData[timePeriod].years.push(entry.year);
+      }
       groupedData[timePeriod].counts.push(entry.count);
     }
   });
@@ -145,10 +149,12 @@ function createStackedAreaChart(data) {
     var trace = {
       x: groupedData[timePeriod].years,
       y: groupedData[timePeriod].counts,
-      mode: 'lines',
+      // fill: 'tozeroy', // Adjust the fill type as needed
       stackgroup: 'one',
       name: timePeriod
     };
+    console.log( groupedData[timePeriod].years)
+    console.log( groupedData[timePeriod].counts)
     traces.push(trace);
   }
 
@@ -157,8 +163,6 @@ function createStackedAreaChart(data) {
     title: 'Traffic Report Counts by Time Period',
     xaxis: {
       title: 'Years',
-      tickvals: years,
-      ticktext:years ,
     },
     yaxis: { title: 'Count' },
     showlegend: true
@@ -167,6 +171,7 @@ function createStackedAreaChart(data) {
   // Create a stacked area chart using Plotly
   Plotly.newPlot('stack', traces, layout);
 }
+
 function getTimePeriod(hour) {
   if (hour >= 0 && hour < 6) {
     return "Night";
