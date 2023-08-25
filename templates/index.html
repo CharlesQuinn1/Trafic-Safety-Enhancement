@@ -38,6 +38,7 @@
 
   <!-- Plotly -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   
 </head>
 
@@ -52,26 +53,22 @@
       </div>
   </header>
     <div class="container">
-      <div class="row">
-            <div id="sample-metadata" class="panel-body"></div>
-          </div>
-        </div>
         <div class="col-md-5">
-          <div id="bar"></div>
+          <div id="bar" style="display: none"></div>
         </div>
         <div class="col-md-7">
-          <div id="stack"></div>
+          <div id="stack" style="display: none"></div>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
-          <div id="line"></div>
+        <div class="col-md-12 ">
+          <div id="line" style="display: none"></div>
         </div>
       </div>
     </div>
-
+    
   <!-- The div that holds our map --> 
-  <div id="map"></div>
+  <div id="map" style="display: none"></div>
 
   <!-- Our JavaScript -->
   

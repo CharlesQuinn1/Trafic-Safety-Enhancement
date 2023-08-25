@@ -3,13 +3,24 @@ let url = '/geoData';
 let homeUrl = '/';
 
 function returnHome() {
-  // Get the data with d3.
+  
+  document.getElementById("line").style.display = "none";
+  document.getElementById("stack").style.display = "none";
+  document.getElementById("bar").style.display = "none";
+  document.getElementById("map").style.display = "none";
+   // Get the data with d3.
   const dataPromise = d3.json(homeUrlSurl);
   console.log(dataPromise);
 
   }
 
 function createPlot() {
+  
+  document.getElementById("line").style.display = "none";
+  document.getElementById("stack").style.display = "none";
+  document.getElementById("bar").style.display = "none";
+  document.getElementById("map").style.display = "block";
+
   const dataPromise = d3.json(url);
   console.log(dataPromise);
 
