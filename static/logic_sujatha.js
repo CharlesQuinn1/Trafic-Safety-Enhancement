@@ -1,7 +1,7 @@
 init();
 
 function init() {
-  d3.json("/api/v1.0/date2").then(data => {
+  d3.json("/api/v1.0/date").then(data => {
     // Group data by year
     var groupedData = {};
     data.forEach(function(entry) {
