@@ -84,108 +84,27 @@ input[type="radio"]{
   margin: 0 10px 0 10px;
 }
 
-
-
-.menu-home {
-  padding: 0 10px;
-  width: fit-content;
+.cluster-map {
+  padding: 10px;
   height: 100%;
-  line-height: 60px;
-  color: #000;
-  display: block;
-}
-
-.menu-home:hover {
-  color: blue
-}
-
-.menu-one {
-  padding: 0 10px;
-  width: fit-content;
-  height: 100%;
-  line-height: 60px;
-  color: #000;
-  display: block;
-}
-
-.menu-one:hover {
-  color: blue
-}
-
-.menu-two {
-  padding: 0 10px;
-  width: fit-content;
-  height: 100%;
-  line-height: 60px;
-  color: #000;
-  display: block;
-}
-
-.menu-two:hover {
-  color: blue
-}
-
-.menu-three {
-  padding: 0 10px;
-  width: fit-content;
-  height: 100%;
-  line-height: 60px;
-  color: #000;
-  display: block;
-}
-
-.menu-three:hover {
-  color: blue
-}
-
-.menu-four {
-  padding: 0 10px;
-  width: fit-content;
-  height: 100%;
-  line-height: 60px;
-  color: #000;
-  display: block;
-}
-
-.menu-four:hover {
-  color: blue
-}
-
-.menu-five {
-  padding: 0 10px;
-  width: fit-content;
-  height: 100%;
-  line-height: 60px;
-  color: #000;
-  display: block;
-}
-
-.menu-five:hover {
-  color: blue
-}
-
-.header-main-nav ul li {
-  display: inline;
-  float: left;
-}
-
-.header-main-nav ul a {
-  padding: 0 10px;
+  width: 100;
   font-family: 'Roboto', sans-serif;
   line-height: 60px;
-  color: #000;
+  background-color: lightcyan;
   display: block;
 }
-
-.header-main-nav ul a:hover {
-  color: blue
-}
-
 
 #map,
 body,
 html {
+  padding-top: 40px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 30px;
   height: 100%;
+  line-height: 60px;
+  color: #000;
+
 }
 
 

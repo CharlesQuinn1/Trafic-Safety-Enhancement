@@ -2,11 +2,13 @@
 
 function dashboard() {
   // Make the elements visible
+document.querySelector(".jumbotron").style.display = "block";
 document.getElementById("line").style.display = "block";
 document.getElementById("stack").style.display = "block";
 document.getElementById("bar").style.display = "block";
+document.querySelector(".cluster-map").style.display = "none";
 document.getElementById("map").style.display = "none";
-
+// 
   d3.json("/api/v1.0/date").then(data => {
     // Group data by year
     var groupedData = {};

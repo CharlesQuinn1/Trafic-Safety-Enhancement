@@ -52,7 +52,7 @@
         Cluster Map <input type="radio" name="currency" id="option_three" onChange="createPlot()"/>
       </div>
   </header>
-    <div class="jumbotron">
+    <div class="jumbotron" style="display: none;">
       <div class="container">
         <div class="row">
         <div class="col-md-5">
@@ -69,8 +69,10 @@
       </div>
     </div>
   </div>
-  <!-- The div that holds our map --> 
-  <div id="map" style="display: none"></div>
+  <div class="cluster-map" >
+    <title>Map Header</title>
+    <div id="map">Map Header</div>
+  </div>
 
   <!-- Our JavaScript -->
   

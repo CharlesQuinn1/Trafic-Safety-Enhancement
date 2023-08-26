@@ -4,6 +4,7 @@ let homeUrl = '/';
 
 function returnHome() {
   
+  document.querySelector(".jumbotron").style.display = "none";
   document.getElementById("line").style.display = "none";
   document.getElementById("stack").style.display = "none";
   document.getElementById("bar").style.display = "none";
@@ -12,14 +13,17 @@ function returnHome() {
   const dataPromise = d3.json(homeUrl);
   console.log(dataPromise);
 
-  }
+}
 
 function createPlot() {
 
+  document.querySelector(".jumbotron").style.display = "none";
   document.getElementById("line").style.display = "none";
   document.getElementById("stack").style.display = "none";
   document.getElementById("bar").style.display = "none";
+  document.querySelector(".cluster-map").style.display = "block";
   document.getElementById("map").style.display = "block";
+
 
   const dataPromise = d3.json(url);
   console.log(dataPromise);
