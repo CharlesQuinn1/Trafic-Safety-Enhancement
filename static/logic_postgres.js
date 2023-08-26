@@ -8,6 +8,7 @@ function returnHome() {
   document.getElementById("line").style.display = "none";
   document.getElementById("stack").style.display = "none";
   document.getElementById("bar").style.display = "none";
+  document.querySelector(".cluster-map").style.display = "none";
   document.getElementById("map").style.display = "none";
    // Get the data with d3.
   const dataPromise = d3.json(homeUrl);
