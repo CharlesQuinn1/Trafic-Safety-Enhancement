@@ -57,6 +57,10 @@ function createPlot() {
         group2 = L.featureGroup.subGroup(mcg),
         group3 = L.featureGroup.subGroup(mcg),
         group4 = L.featureGroup.subGroup(mcg),
+        group5 = L.featureGroup.subGroup(mcg),
+        group6 = L.featureGroup.subGroup(mcg),
+        group7 = L.featureGroup.subGroup(mcg),
+        group8 = L.featureGroup.subGroup(mcg),
         control = L.control.layers(null, null, { collapsed: false }),
         i, a, title, marker;
     
@@ -67,23 +71,31 @@ function createPlot() {
       marker = L.marker([data[i]['latitude'], data[i]['longitude']], { title: title });
       marker.bindPopup(title);
     
-      marker.addTo(i < quarterCount ? group1 : i < quarterCount * 2 ? group2 : i < quarterCount * 3 ? group3 : group4);
+      // marker.addTo(data[i]['issue_reported'] == 'VEHICLE FIRE' ? group1 : i < quarterCount * 2 ? group2 : i < quarterCount * 3 ? group3 : group4);
+      marker.addTo(data[i]['issue_reported'] == 'COLLISION' ? group1 : data[i]['issue_reported'] == 'VEHICLE FIRE' ? group2 : data[i]['issue_reported'] == 'STALLED VEHICLE' ? group3 : data[i]['issue_reported'] == 'ICY ROADWAY' ? group4 :  data[i]['issue_reported'] == 'OBSTRUCTION' ? group5 : data[i]['issue_reported'] == 'LOOSE LIVESTOCK' ? group6 : data[i]['issue_reported'] == 'BOAT ACCIDENT' ? group7: group8);
     }
     
-    control.addOverlay(group1, `Less than ${quarterCount}`);
-    control.addOverlay(group2, `Less than ${quarterCount*2}`);
-    control.addOverlay(group3, `Less than ${quarterCount*3}`);
-    control.addOverlay(group4, `Less than ${quarterCount*4}`);
+    control.addOverlay(group1, 'COLLISION'); //
+    control.addOverlay(group2, 'VEHICLE FIRE'); //
+    control.addOverlay(group3, 'STALLED VEHICLE'); //
+    control.addOverlay(group4, 'ICY ROADWAY'); //
+    control.addOverlay(group5, 'OBSTRUCTION'); //
+    control.addOverlay(group6, 'LOOSE LIVESTOCK'); //
+    control.addOverlay(group7, 'BOAT ACCIDENT'); //
+    control.addOverlay(group8, 'OTHER');
     control.addTo(map);
     
-    group1.addTo(map); // Adding to map now adds all child layers into the parent group.
+    group1.addTo(map);
     group2.addTo(map);
     group3.addTo(map);
     group4.addTo(map);
+    group5.addTo(map);
+    group6.addTo(map);
+    group7.addTo(map);
+    group8.addTo(map);
     
     
     // Set-up buttons.
-    
     document.getElementById("add").addEventListener("click", function () {
       map.addLayer(mcg);
     });
