@@ -35,60 +35,63 @@ function createPlot() {
   const dataPromise = d3.json(url);
   console.log(dataPromise);
 
-  // Creating the map object
-  let map = L.map("map", {
-    center: [30.266666, -97.733330],
-    zoom: 14
-  });
-
-  // Adding the tile layer
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
-
   // Get the data with d3.
   d3.json(url).then(function(data) {
     console.log(data);
 
-    // Create a new marker cluster group.
-    let markers = L.markerClusterGroup({
-      iconCreateFunction: function (cluster) {
-        var childCount = cluster.getChildCount();
-        var c = ' marker-cluster-';
-        if (childCount < 100) {
-          c += '100';
-        } 
-        else if (childCount < 500) {
-          c += '500';
-        } 
-        else if (childCount < 1000) {
-          c += '1000';
-        } 
-        else if (childCount < 2000) {
-          c += '2000';
-        } 
-        else {
-          c += 'large';
-        }
-        
-        return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', 
-          className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
-        }
-    });
+    var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
+    }),
+    latlng = L.latLng(30.266666, -97.733330),
+    fullCount = data.length,
+    quarterCount = Math.round(fullCount / 4);
 
-    // Loop through the data.
+
+    var map = L.map('map', {center: latlng, zoom: 13, layers: [tiles]});
+
+    // var map = L.map('map', {center: latlng, zoom: 13, layers: [tiles]});
+
+    var mcg = L.markerClusterGroup(),
+        group1 = L.featureGroup.subGroup(mcg),
+        group2 = L.featureGroup.subGroup(mcg),
+        group3 = L.featureGroup.subGroup(mcg),
+        group4 = L.featureGroup.subGroup(mcg),
+        control = L.control.layers(null, null, { collapsed: false }),
+        i, a, title, marker;
+    
+    mcg.addTo(map);
+    
     for (let i = 0; i < data.length; i++) {
-
-      // Add a new marker to the cluster group, and bind a popup.
-      markers.addLayer(L.marker([data[i]['latitude'], data[i]['longitude']])
-        .bindPopup('bob'));
-      }
-
-    // Add our marker cluster layer to the map.
-    map.addLayer(markers);
+      title = data[i]['issue_reported'];
+      marker = L.marker([data[i]['latitude'], data[i]['longitude']], { title: title });
+      marker.bindPopup(title);
+    
+      marker.addTo(i < quarterCount ? group1 : i < quarterCount * 2 ? group2 : i < quarterCount * 3 ? group3 : group4);
+    }
+    
+    control.addOverlay(group1, `Less than ${quarterCount}`);
+    control.addOverlay(group2, `Less than ${quarterCount*2}`);
+    control.addOverlay(group3, `Less than ${quarterCount*3}`);
+    control.addOverlay(group4, `Less than ${quarterCount*4}`);
+    control.addTo(map);
+    
+    group1.addTo(map); // Adding to map now adds all child layers into the parent group.
+    group2.addTo(map);
+    group3.addTo(map);
+    group4.addTo(map);
+    
+    
+    // Set-up buttons.
+    
+    document.getElementById("add").addEventListener("click", function () {
+      map.addLayer(mcg);
+    });
+    
+    document.getElementById("remove").addEventListener("click", function () {
+      map.removeLayer(mcg);
+    });
 
   })
     
 }
-
-// d3.selectAll(".menu-one").on("click",createPlot);

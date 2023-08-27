@@ -3,16 +3,11 @@
 function dashboard() {
   // Make the elements visible
   document.querySelector(".home-page").style.setProperty('display', 'none');
+  document.querySelector(".container").style.setProperty('width', '100%');
   document.querySelector(".container").style.setProperty('display', 'flex');
   document.querySelector(".container").style.setProperty('flex-direction', 'column');
-  document.querySelector(".col-md-12").style.setProperty('display', 'flex');
-  document.querySelector(".col-md-12").style.setProperty('justify-content', 'center');
-  document.getElementById("line").style.setProperty('height', '380px');
-  document.getElementById("line").style.setProperty('width', '80%');
   document.getElementById("line").style.display = "block";
-  document.getElementById("stack").style.setProperty('height', '380px');
   document.getElementById("stack").style.display = "block";
-  document.getElementById("bar").style.setProperty('height', '380px');
   document.getElementById("bar").style.display = "block";
   document.querySelector(".cluster-map").style.display = "none";
   document.getElementById("map").style.display = "none";

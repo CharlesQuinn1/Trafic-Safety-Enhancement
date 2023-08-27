@@ -34,17 +34,40 @@ def index():
 @app.route("/geoData")
 def geoData():
 
-    # session = Session(engine)
+    # # session = Session(engine)
+    # # Query to group by year and time
+    # results = (
+    # session.query(
+    #     TrafficReport.latitude,
+    #     TrafficReport.longitude,
+    #     TrafficReport.issue_reported
+    # ).all()
+    # )
+
     # Query to group by year and time
-    results = (
-    session.query(
-        TrafficReport.latitude,
-        TrafficReport.longitude
-    ).all()
-    )
+    sql = 'select '
+    sql += ' tbl.issue_reported '
+    sql += ',tbl.latitude '
+    sql += ',tbl.longitude '
+    sql += ',tbl.issue_count '
+    sql += 'from '
+    sql += '(select '
+    sql += " upper(replace(issue_reported, 'z', '')) as issue_reported "
+    sql += ',latitude '
+    sql += ',longitude '
+    sql += ',count(report_id) as issue_count '
+    sql += 'from traffic_report '
+    sql += 'group by '
+    sql += "upper(replace(issue_reported, 'z', '')) "
+    sql += ',latitude '
+    sql += ',longitude) as tbl '
+    sql += 'where tbl.issue_count > 1 '
+    results = session.execute(sql)
+
+
  # Convert results to a list of dictionaries
     result_dicts = [
-    {"latitude": result.latitude, "longitude": result.longitude}
+    {"latitude": result.latitude, "longitude": result.longitude, "issue_reported": result.issue_reported}
     for result in results
     ]
 
