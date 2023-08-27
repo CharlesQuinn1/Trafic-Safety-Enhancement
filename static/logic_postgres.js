@@ -4,12 +4,15 @@ let homeUrl = '/';
 
 function returnHome() {
   
-  document.querySelector(".jumbotron").style.display = "none";
+  document.querySelector(".home-page").style.setProperty('display', 'block');
+  document.querySelector(".container").style.display = "none";
   document.getElementById("line").style.display = "none";
   document.getElementById("stack").style.display = "none";
   document.getElementById("bar").style.display = "none";
   document.querySelector(".cluster-map").style.display = "none";
   document.getElementById("map").style.display = "none";
+  document.querySelector(".issue-analysis").style.display = "none";
+  document.getElementById("issue").style.display = "none";
    // Get the data with d3.
   const dataPromise = d3.json(homeUrl);
   console.log(dataPromise);
@@ -18,13 +21,16 @@ function returnHome() {
 
 function createPlot() {
 
-  document.querySelector(".jumbotron").style.display = "none";
+  document.querySelector(".home-page").style.setProperty('display', 'none');
+  document.querySelector(".container").style.display = "none";
   document.getElementById("line").style.display = "none";
   document.getElementById("stack").style.display = "none";
   document.getElementById("bar").style.display = "none";
+  document.getElementById("issue").style.display = "none";
+  document.querySelector(".issue-analysis").style.display = "none";
+  document.getElementById("issue").style.display = "none";
   document.querySelector(".cluster-map").style.display = "block";
   document.getElementById("map").style.display = "block";
-
 
   const dataPromise = d3.json(url);
   console.log(dataPromise);

@@ -60,7 +60,7 @@ a {
 .header-main-logo {
   width: fit-content;
   height: 100%;
-  padding-left: 60px;
+  padding-left: 40px;
   display: flex;
 }
 
@@ -70,7 +70,7 @@ a {
 }
 
 .header-main-nav {
-  width:400px;
+  width: 500px;
   height: 60px;
   font-family: 'Roboto', sans-serif;
   line-height: 60px;
@@ -80,36 +80,51 @@ a {
 }
 
 input[type="radio"]{
-  padding-left: 30px;
+  /* padding-left: 1000px; */
   font-family: 'Roboto', sans-serif;
   height: 60px;
 }
 
-input[type="radio"]:hover{
-  font-family: 'Roboto', sans-serif;
-  background-color: #fff;
-  color:blue;
-}
-
-
 .cluster-map {
   padding: 10px;
   height: 100%;
-  width: 100;
+  width: 100%; */
   font-family: 'Roboto', sans-serif;
   font-size: x-large;
-  line-height: 60px;
-  /* background-color: lightcyan; */
   display: block;
   text-align: center;
   position: relative;
 }
 
+.issue-analysis {
+  padding-left: 80px;
+  padding-right: 80px;
+  height: 100%;
+  width: 100%;
+  display: block;
+  justify-content: center;
+}
+
+
 .cluster-map header{
-  position: absolute;
+  position: relative;
   top: 0;
   transform: translate(0, -50%);
+  font-family: 'Roboto', sans-serif;
+  font-size: x-large;
+  text-align: center;
   background: white;
+}
+
+.home-page {
+  padding: 10px;
+  height: 100%;
+  width: 100%; */
+  font-family: 'Roboto', sans-serif;
+  font-size: x-large;
+  display: block;
+  text-align: center;
+  position: relative;
 }
 
 

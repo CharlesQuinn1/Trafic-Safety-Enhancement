@@ -33,7 +33,7 @@
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
 
   <!-- Our CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='reset.css') }}">
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='reset.css') }}"> -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
   <!-- Plotly -->
@@ -50,9 +50,10 @@
         HOME <input type="radio" name="currency"  id="option_one" checked="checked" onChange="returnHome()" />
         Dashboard <input type="radio" name="currency" id="option_two" onChange="dashboard()"/>
         Cluster Map <input type="radio" name="currency" id="option_three" onChange="createPlot()"/>
+        Reported Issue <input type="radio" name="currency" id="option_four" onChange="analysis()"/>
       </div>
   </header>
-    <div class="jumbotron" style="display: none;">
+    <!-- <div class="jumbotron" style="display: none;"> -->
       <div class="container">
         <div class="row">
         <div class="col-md-5">
@@ -68,16 +69,24 @@
         </div>
       </div>
     </div>
+  <div class="home-page">
+    <img src="{{ url_for('static', filename='home.png') }}"></img>
   </div>
+  <!-- </div> -->
   <div class="cluster-map" style="display: none;">
     <header>Accident Distribution 2018 - 2022</header>
     <div id="map"></div>
+  </div>
+  <div class="issue-analysis" style="display: none;">
+    <header></header>
+    <div id="issue"></div>
   </div>
 
   <!-- Our JavaScript -->
   
   <script src="{{ url_for('static', filename='logic_postgres.js') }}"></script>
   <script src="{{ url_for('static', filename='logic_sujatha.js') }}"></script>
+  <script src="{{ url_for('static', filename='logic_joshna.js') }}"></script>
   
 </body>
 

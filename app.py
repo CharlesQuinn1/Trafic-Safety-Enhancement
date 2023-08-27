@@ -80,6 +80,37 @@ def date_func2():
 
     return jsonify(result_dicts)
 
+@app.route("/analysis")
+def analysis():
+
+    # session = Session(engine)
+    # Query to group by year and time
+    sql = '    select '
+    sql +=' tbl.issue_reported '
+    sql +=',tbl.issue_count '
+    sql +=',tbl.cal_year '
+    sql +='from '
+    sql +='(select '
+    sql +=" upper(replace(issue_reported, 'z', '')) as issue_reported "
+    sql +=',extract(year from published_date) as cal_year '
+    sql +=',count(report_id) as issue_count '
+    sql +='from traffic_report '
+    sql +='group by '
+    sql +=" upper(replace(issue_reported, 'z', '')) "
+    sql +=',extract(year from published_date) '
+    sql +=') as tbl '
+    sql +='where tbl.issue_count > 500 '
+    results = session.execute(sql)
+
+ # Convert results to a list of dictionaries
+    result_dicts = [
+    {"year": result.cal_year, "issue_reported": result.issue_reported, "issue_count": result.issue_count}
+    for result in results
+    ]
+
+    session.close()
+
+    return jsonify(result_dicts)
 
 
 if __name__ == "__main__":
