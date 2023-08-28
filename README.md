@@ -45,6 +45,7 @@ Visualizations</p>
 <li>Numpy</li>
 <li>SQLAlchemy</li>
 <li>Postgres</li>
+<li>Leaflet.markercluster</li>
 </ul>
 
 <h2>Installation</h2>
