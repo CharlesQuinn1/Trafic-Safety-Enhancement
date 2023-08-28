@@ -21,13 +21,13 @@
 Visualizations</p>
 
 <ul style="list-style-type:circle;">
-<li><b>Dashboard showing:</b></li>
+<b>Dashboard showing:</b>
 <li>Total Traffic Counts From 2018 - 2022: Bar Chart</li>
 <li>Traffic Counts by Time Period From 2018 – 2022: Stacked Bar Chart</li>
 <li>Traffic Counts by Hour From 2018 – 2022: Line Chart</li>
-<li><b>Cluster Map showing:</b></li>
+<b>Cluster Map showing:</b>
 <li>Accident Distribution by issue From 2018 – 2022: Cluster Map</li>
-<li><b>Graph showing:</b></li>
+<b>Graph showing:</b>
 <li>Accident Distribution by issue From 2018 – 2022: Line Chart</li>
 </ul>
 <p>This interactive dashboard explores the <a href="https://data.austintexas.gov/Transportation-and-Mobility/Real-Time-Traffic-Incident-Reports/dx9v-zd7x">Real-Time-Traffic-Incident-Reports</a> dataset. This data set contains traffic incident information from the Austin-Travis County traffic reports.</p>
