@@ -3,9 +3,7 @@
 function dashboard() {
   // Make the elements visible
   document.querySelector(".home-page").style.setProperty('display', 'none');
-  document.querySelector(".container").style.setProperty('width', '100%');
-  document.querySelector(".container").style.setProperty('display', 'flex');
-  document.querySelector(".container").style.setProperty('flex-direction', 'column');
+  document.querySelector(".container").style.setProperty('display', 'block');
   document.getElementById("line").style.display = "block";
   document.getElementById("stack").style.display = "block";
   document.getElementById("bar").style.display = "block";
