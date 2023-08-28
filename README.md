@@ -21,10 +21,10 @@
 Visualizations</p>
 
 <ul style="list-style-type:circle;">
-<li>Dashboard showing:</li>
-<li>&emsp;&emsp;Total Traffic Counts From 2018 - 2022: Bar Chart</li>
-<li>&emsp;&emsp;Traffic Counts by Time Period From 2018 – 2022: Stacked Bar Chart</li>
-<li>&emsp;&emsp;Traffic Counts by Hour From 2018 – 2022: Line Chart</li>
+<li><b>Dashboard showing:</b></li>
+<li>Total Traffic Counts From 2018 - 2022: Bar Chart</li>
+<li>Traffic Counts by Time Period From 2018 – 2022: Stacked Bar Chart</li>
+<li>Traffic Counts by Hour From 2018 – 2022: Line Chart</li>
 <li>Accident Distribution by issue From 2018 – 2022: Cluster Map</li>
 <li>Accident Distribution by issue From 2018 – 2022: Line Chart</li>
 </ul>
