@@ -34,7 +34,7 @@ Visualizations</p>
 <ul style="list-style-type:circle;">
 <li>Accident Distribution by issue From 2018 – 2022: Line Chart</li>
 </ul>
-<p>This interactive dashboard explores the <a href="https://data.austintexas.gov/Transportation-and-Mobility/Real-Time-Traffic-Incident-Reports/dx9v-zd7x">Real-Time-Traffic-Incident-Reports</a> dataset. This data set contains traffic incident information from the Austin-Travis County traffic reports.</p>
+<p>This interactive dashboard explores the <a href="https://data.austintexas.gov/Transportation-and-Mobility/Real-Time-Traffic-Incident-Reports/dx9v-zd7x">Real-Time-Traffic-Incident-Reports</a> dataset from Austin Texas Transportation and Mobility. This data set contains traffic incident information from the Austin-Travis County traffic reports.</p>
 
 <h2>Built with</h2>
 <ul style="list-style-type:circle;">
