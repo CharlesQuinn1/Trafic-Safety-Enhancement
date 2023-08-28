@@ -36,8 +36,6 @@ Visualizations</p>
 •	SQLAlchemy<br>
 •	Postgres<br>
 
-<h2>Getting Started</h2>
-
 <h2>Installation</h2>
 •	Clone this repo and save it in your local directory.<br>
 •	git clone https://github.com/CharlesQuinn1/Trafic-Safety-Enhancement.git<br>
