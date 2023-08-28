@@ -5,10 +5,10 @@
 
 <h2>Project Team</h2>
 <ul style="list-style-type:circle;">
-<li>Charles Quinn</li><br>
-<li>Joshna Rence</li><br>
-<li>Jackeline Larios</li><br>
-<li>Sujatha Angajala</li><br>
+<li>Charles Quinn</li>
+<li>Joshna Rence</li>
+<li>Jackeline Larios</li>
+<li>Sujatha Angajala</li>
 </ul>
 
 <h2>Project Title</h2>
