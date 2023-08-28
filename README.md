@@ -14,6 +14,7 @@ This proposal aims to present a comprehensive plan for enhancing transportation 
 
 We've provided five interactive visualizations in our dashboard to show the following data:
 Visualizations
+
 •	Dashboard showing:
   o	Total Traffic Counts From 2018 - 2022: Bar Chart
   o	Traffic Counts by Time Period From 2018 – 2022: Stacked Bar Chart
@@ -30,7 +31,7 @@ This interactive dashboard explores the https://data.austintexas.gov/Transportat
 •	Pandas
 •	Numpy
 •	SQLAlchemy
-•	SQLite
+•	Postgres
 
 <h2>Getting Started</h2>
 
