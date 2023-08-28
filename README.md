@@ -37,23 +37,29 @@ Visualizations</p>
 <p>This interactive dashboard explores the <a href="https://data.austintexas.gov/Transportation-and-Mobility/Real-Time-Traffic-Incident-Reports/dx9v-zd7x">Real-Time-Traffic-Incident-Reports</a> dataset. This data set contains traffic incident information from the Austin-Travis County traffic reports.</p>
 
 <h2>Built with</h2>
-•	Flask API<br>
-•	HTML<br>
-•	JavaScript<br>
-•	Pandas<br>
-•	Numpy<br>
-•	SQLAlchemy<br>
-•	Postgres<br>
+<ul style="list-style-type:circle;">
+<li>Flask API</li>
+<li>HTML</li>
+<li>JavaScript</li>
+<li>Pandas</li>
+<li>Numpy</li>
+<li>SQLAlchemy</li>
+<li>Postgres</li>
+</ul>
 
 <h2>Installation</h2>
-•	Clone this repo and save it in your local directory.<br>
-•	git clone https://github.com/CharlesQuinn1/Trafic-Safety-Enhancement.git<br>
-•	Visit localhost: 5000 in your browser<br>
+<ul style="list-style-type:circle;">
+<li>Clone this repo and save it in your local directory.</li>
+<li>git clone https://github.com/CharlesQuinn1/Trafic-Safety-Enhancement.git</li>
+<li>Visit localhost: 5000 in your browser</li>
+</ul>
 
 <h2>Flask APIs</h2>
-•	Dashboard: Bar Chart, Stacked Bar Chart, Area Chart /api/v1.0/date<br>
-•	Accident Distribution by issue From 2018 – 2022: Cluster Map /geoData<br>
-•	Accident Distribution by issue From 2018 – 2022: Line Chart /analysis<br>
+<ul style="list-style-type:circle;">
+<li>Dashboard: Bar Chart, Stacked Bar Chart, Area Chart /api/v1.0/date</li>
+<li>Accident Distribution by issue From 2018 – 2022: Cluster Map /geoData</li>
+<li>Accident Distribution by issue From 2018 – 2022: Line Chart /analysis</li>
+</ul>
 
 <h2>Data Sources</h2>
 <p>Austin Texas Transportation and Mobility: <a href="https://data.austintexas.gov/Transportation-and-Mobility/Real-Time-Traffic-Incident-Reports/dx9v-zd7x">Real-Time-Traffic-Incident-Reports</a></p>
