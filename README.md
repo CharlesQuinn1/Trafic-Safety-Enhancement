@@ -19,9 +19,9 @@ Sujatha Angajala<br>
 Visualizations</p>
 
 •	Dashboard showing:<br>
-  o	Total Traffic Counts From 2018 - 2022: Bar Chart<br>
-  o	Traffic Counts by Time Period From 2018 – 2022: Stacked Bar Chart<br>
-  o	Traffic Counts by Hour From 2018 – 2022: Line Chart<br>
+  &emsp;o	Total Traffic Counts From 2018 - 2022: Bar Chart<br>
+  &emsp;o	Traffic Counts by Time Period From 2018 – 2022: Stacked Bar Chart<br>
+  &emsp;o	Traffic Counts by Hour From 2018 – 2022: Line Chart<br>
 •	Accident Distribution by issue From 2018 – 2022: Cluster Map<br>
 •	Accident Distribution by issue From 2018 – 2022: Line Chart<br>
 
