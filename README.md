@@ -1,8 +1,6 @@
 # Trafic-Safety-Enhancement
 
-![image](https://github.com/CharlesQuinn1/Trafic-Safety-Enhancement/assets/128498023/6872df50-b51c-4d7e-b86f-9a6a37aad3a1)
-
-<h4>Group-Project-3</h4>
+<h2>Group-Project-3</h2>
 Group-Project-3 for data visualization challenge of modules 14, 15, and 16
 Project Team
 Charles Quinn, Joshna Rence, Jackeline Larios, Sujatha Angajala
