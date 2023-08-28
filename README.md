@@ -4,10 +4,12 @@
 <p>Group-Project-3 for data visualization challenge of modules 14, 15, and 16</p>
 
 <h2>Project Team</h2>
-Charles Quinn<br>
-Joshna Rence<br>
-Jackeline Larios<br>
-Sujatha Angajala<br>
+<ul style="list-style-type:circle;">
+<li>Charles Quinn</li><br>
+<li>Joshna Rence</li><br>
+<li>Jackeline Larios</li><br>
+<li>Sujatha Angajala</li><br>
+</ul>
 
 <h2>Project Title</h2>
 <p>Transportation and Traffic Safety Enhancement in Austin, Texas</p>
