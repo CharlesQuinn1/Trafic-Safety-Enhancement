@@ -1,7 +1,7 @@
 # Trafic-Safety-Enhancement
 
 <h2>Group-Project-3</h2>
-Group-Project-3 for data visualization challenge of modules 14, 15, and 16
+<p>Group-Project-3 for data visualization challenge of modules 14, 15, and 16</p><br>
 Project Team
 Charles Quinn, Joshna Rence, Jackeline Larios, Sujatha Angajala
 Project Title
