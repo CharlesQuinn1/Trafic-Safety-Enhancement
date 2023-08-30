@@ -45,6 +45,7 @@ Visualizations</p>
 <li>Numpy</li>
 <li>SQLAlchemy</li>
 <li>Postgres</li>
+<li><a href="https://github.com/ghybs/Leaflet.FeatureGroup.SubGroup/blob/master/docs/README.md">Leaflet.FeatureGroup.SubGroup</a></li>
 </ul>
 
 <h2>Installation</h2>
