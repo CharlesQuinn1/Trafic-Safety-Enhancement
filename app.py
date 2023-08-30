@@ -53,7 +53,6 @@ def geoData():
     sql += ' issue_cat.issue_new '
     sql += ',latitude '
     sql += ',longitude) as tbl '
-    sql += 'where tbl.issue_count > 1 '
     results = session.execute(sql)
 
 
